@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "usage": "Android launcher icon and in-app brand image",
+  "prompt": "Use case: logo-brand. Asset type: original Android launcher icon for an independent JavaScript automation app. Primary request: a beautifully crafted premium app icon, square straight-on orthographic composition, no mockup, no device, no text. Centered original sculptural mark of two softly rounded white coding angle brackets surrounding a small radiant cyan four-point automation spark, on a rich indigo-to-violet satin rounded-square tile. Refined dimensional depth and subtle light from upper left, restrained soft shadows contained entirely inside the tile, precise smooth edges. Strong recognizable silhouette at 48px; large central emblem occupying about 55 percent of full canvas, safe margin for Android circular/squircle adaptive masks. Elegant approachable developer productivity aesthetic. Canvas fills edge to edge with indigo background; no exterior drop shadow or white border, no letters, no watermark, no official Scriptable or Apple logos. Make one clean standalone icon image, not a grid.",
+  "assets": {
+    "original": "docs/assets/app-icon-original-v2.png",
+    "inApp": "app/src/main/assets/brand/app-icon-v2.png",
+    "android": "app/src/main/res/drawable-nodpi/ic_launcher_art_v2.png"
+  },
+  "derivedAssets": "Deterministic scaling for packaging only; artwork unchanged."
+}

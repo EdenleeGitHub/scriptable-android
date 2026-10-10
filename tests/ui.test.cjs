@@ -1,0 +1,108 @@
+const { chromium } = require('playwright');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { spawn } = require('node:child_process');
+const project = path.resolve(__dirname,'..');
+const base = 'http://127.0.0.1:4184';
+const screenshots = path.join(project,'dist/screenshots');
+const server = spawn(process.execPath,['tools/preview.cjs'],{cwd:project,env:{...process.env,PORT:'4184'},stdio:'ignore'});
+const delay = ms => new Promise(resolve=>setTimeout(resolve,ms));
+async function runScript(page,code) {
+  return await page.evaluate(async code=>{
+    const logs=[],states=[],widgets=[],previews=[];
+    try { const result=await ScriptRunner.run({id:'test-run',name:'测试',code},{onLog:(level,values)=>logs.push({level,values}),onState:(state,message)=>states.push({state,message}),onWidget:tree=>widgets.push(tree),onPreview:(value,format)=>previews.push({value,format})});return {logs,states,widgets,previews,result}; }
+    catch(e){return {logs,states,widgets,previews,error:e.message};}
+  },code);
+}
+let browser;
+(async()=>{
+  for(let i=0;i<60;i++){try{if((await fetch(base+'/bridge.js')).ok)break;}catch{}await delay(100);}
+  const installedChrome='C:/Program Files/Google/Chrome/Application/chrome.exe';
+  browser=await chromium.launch({headless:true,...(fs.existsSync(installedChrome)?{executablePath:installedChrome}:{})});
+  const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,locale:'zh-CN'});
+  // Test real browser Worker and host transport apart from interface state.
+  const bridge=await context.newPage();
+  await bridge.goto(base+'/bridge.js');
+  await bridge.setContent('<!doctype html><html><body></body></html>');
+  await bridge.addScriptTag({url:base+'/bridge.js'});
+  await bridge.evaluate(()=>Host.ready);
+  let result=await runScript(bridge,'console.log("你好", await Promise.resolve(42)); Script.setShortcutOutput("完成");');
+  assert.equal(result.result,'完成');assert.equal(result.logs[0].values[1],42);assert.equal(result.states.at(-1).state,'done');
+  result=await runScript(bridge,'const f=FileManager.local(); const p=f.joinPath(f.documentsDirectory(),"测试.txt"); f.writeString(p,"跨运行保存"); console.log(f.readString(p));');
+  assert.equal(result.error,undefined);
+  result=await runScript(bridge,'console.log(FileManager.local().readString("/documents/测试.txt"));');
+  assert.equal(result.logs[0].values[0],'跨运行保存');
+  result=await runScript(bridge,'const w=new ListWidget();w.backgroundColor=new Color("152341");w.addText("安卓组件");Script.setWidget(w);await w.presentMedium();');
+  assert.equal(result.error,undefined);assert.equal(result.widgets[0].children[0].text,'安卓组件');
+  const widget=await bridge.evaluate(()=>JSON.parse(localStorage.getItem('scriptable-android-preview-v1')).widget);
+  assert.equal(widget.scriptId,'test-run');
+  result=await runScript(bridge,'throw new Error("故意报错");');assert.equal(result.error,'故意报错');
+  result=await runScript(bridge,'FileManager.iCloud();');assert.match(result.error,/not configured/);
+  await bridge.evaluate(()=>{window.loopResolved=false;window.loopResult=ScriptRunner.run({id:'loop',name:'循环',code:'while(true){}'}).then(()=>{window.loopResolved=true;});});
+  await delay(150);await bridge.evaluate(()=>ScriptRunner.stop());await bridge.waitForFunction(()=>window.loopResolved && !ScriptRunner.isRunning());
+  result=await runScript(bridge,'console.log("停止后仍能运行");');assert.equal(result.logs[0].values[0],'停止后仍能运行');
+  const alertResult=runScript(bridge,'const a=new Alert();a.title="浏览器弹窗测试";a.addTextField("内容","默认");a.addAction("确认");console.log(await a.presentAlert(),a.textFieldValue(0));');
+  await bridge.getByRole('dialog').waitFor();await bridge.getByRole('dialog').locator('input').fill('输入有效');await bridge.getByRole('button',{name:'确认',exact:true}).click();
+  result=await alertResult;assert.equal(result.logs[0].values[0],0);assert.equal(result.logs[0].values[1],'输入有效');
+  console.log('PASS: browser Worker, persistence, widgets, errors, stop and dialog bridge');
+  await bridge.close();
+  const page=await context.newPage();const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(base);await page.waitForSelector('.script-card');
+  assert.equal(await page.locator('.script-card').count(),4);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  fs.mkdirSync(screenshots,{recursive:true});
+  await page.screenshot({path:path.join(screenshots,'01-library-mobile.png'),fullPage:true});
+  // Interface interactions are added below with selectors shared by the UI.
+  await page.locator('.card-open').first().click();
+  await page.waitForSelector('.code-input');
+  await page.locator('.code-input').fill('console.log("编辑运行成功");');
+  await delay(700);
+  const saved=await page.evaluate(()=>Host.sync('repo.list')[0].code);
+  assert.equal(saved,'console.log("编辑运行成功");');
+  await page.locator('.editor-run').click();
+  await page.waitForFunction(()=>!ScriptRunner.isRunning());
+  await page.getByText('编辑运行成功',{exact:false}).first().waitFor();
+  await page.screenshot({path:path.join(screenshots,'02-editor-mobile.png'),fullPage:true});
+  await page.reload();await page.waitForSelector('.script-card');
+  await page.locator('.card-open').first().click();await page.waitForSelector('.code-input');
+  assert.equal(await page.locator('.code-input').inputValue(),'console.log("编辑运行成功");');
+  await page.locator('#editor-back').click();
+  await page.locator('[data-tab="examples"]').click();
+  assert.ok(await page.locator('.example-card').count()>=4);
+  await page.locator('.import-example').first().click();
+  await page.waitForSelector('.code-input');
+  assert.equal(await page.evaluate(()=>Host.sync('repo.list').length),5);
+  await page.locator('#editor-back').click();
+  await page.locator('[data-tab="docs"]').click();
+  assert.ok(await page.locator('.doc-summary').count()>=10);
+  await page.locator('.doc-summary').first().click();
+  await page.locator('[data-tab="settings"]').click();
+  await page.locator('#theme-setting').selectOption('dark');
+  assert.equal(await page.evaluate(()=>document.documentElement.dataset.theme),'dark');
+  await page.locator('#font-setting').selectOption('16');
+  assert.equal(await page.evaluate(()=>Host.sync('settings.get').fontSize),16);
+  await page.locator('[data-tab="scripts"]').click();
+  await page.screenshot({path:path.join(screenshots,'03-library-dark-mobile.png'),fullPage:true});
+  await page.reload();await page.waitForSelector('.script-card');
+  assert.equal(await page.evaluate(()=>document.documentElement.dataset.theme),'dark');
+  await page.locator('#script-search').fill('不会匹配的脚本名');
+  assert.equal(await page.locator('.script-card').count(),0);
+  await page.locator('#script-search').fill('');
+  await page.locator('#add-script').click();
+  await page.locator('#script-name').fill('新建操作测试');
+  await page.locator('#properties-save').click();await page.waitForSelector('.code-input');
+  assert.equal(await page.evaluate(()=>Host.sync('repo.list').length),6);
+  await page.locator('#editor-more').click();
+  await page.getByText('删除脚本',{exact:true}).click();
+  await page.locator('#delete-confirm').click();
+  await page.waitForSelector('.script-card');
+  assert.equal(await page.evaluate(()=>Host.sync('repo.list').length),5);
+  assert.deepEqual(errors,[]);
+  console.log('PASS: mobile UI, editing, autosave, execution, reload, gallery, docs, theme, font, search, create and delete');
+  await page.locator('[data-tab="settings"]').click();await page.locator('#theme-setting').selectOption('light');
+  await page.locator('[data-tab="scripts"]').click();await page.setViewportSize({width:1280,height:900});
+  await page.screenshot({path:path.join(screenshots,'04-library-desktop.png'),fullPage:true});
+  await context.close();
+})().then(()=>console.log('All browser checks passed.')).catch(error=>{console.error(error);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();server.kill();});

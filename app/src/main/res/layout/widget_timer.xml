@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Chronometer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_live_timer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:includeFontPadding="false"
+    android:gravity="top|left"
+    android:singleLine="true"
+    android:maxLines="1"
+    android:ellipsize="end"
+    android:textColor="#FFFFFF"
+    android:textSize="15sp"
+    android:clickable="false"
+    android:focusable="false"
+    android:importantForAccessibility="no" />

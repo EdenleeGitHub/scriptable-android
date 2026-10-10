@@ -1,0 +1,182 @@
+[
+  {
+    "id": "example-hello",
+    "name": "你好，Android",
+    "description": "用一个原生弹窗认识脚本。输入你的名字，得到专属问候。",
+    "category": "快速入门",
+    "color": "#6370ee",
+    "icon": "spark",
+    "code": "// 从一个小小的问候开始\nconst alert = new Alert();\nalert.title = \"你好，Android 👋\";\nalert.message = \"写下你的名字，开始你的脚本旅程。\";\nalert.addTextField(\"你的名字\", \"朋友\");\nalert.addAction(\"打个招呼\");\nalert.addCancelAction(\"下次再说\");\n\nconst choice = await alert.presentAlert();\nif (choice === 0) {\n  const name = alert.textFieldValue(0) || \"朋友\";\n  console.log(\"你好，\" + name + \"！\");\n  console.log(\"你的第一个 JavaScript 脚本运行成功。\");\n} else {\n  console.log(\"随时欢迎回来。\");\n}\n"
+  },
+  {
+    "id": "example-device",
+    "name": "设备状态小组件",
+    "description": "查看手机与电池信息，生成一个可添加到主屏幕的状态小组件。",
+    "category": "小组件",
+    "color": "#46a6bd",
+    "icon": "device",
+    "code": "// 生成设备状态小组件\nconst widget = new ListWidget();\nwidget.backgroundColor = new Color(\"22314F\");\nwidget.setPadding(20, 20, 20, 20);\n\nconst heading = widget.addText(\"我的 Android\");\nheading.textColor = Color.white();\nheading.font = Font.boldSystemFont(20);\nwidget.addSpacer(14);\n\nconst name = widget.addText(Device.model());\nname.textColor = new Color(\"CBD6F1\");\nname.font = Font.systemFont(13);\nwidget.addSpacer(5);\nconst battery = Math.round(Device.batteryLevel() * 100);\nconst batteryText = battery >= 0 ? battery + \"%\" : \"未知\";\nconst status = widget.addText(\"电量 \" + batteryText + (Device.isCharging() ? \" · 充电中\" : \"\"));\nstatus.textColor = new Color(\"8AE2CE\");\nstatus.font = Font.mediumSystemFont(15);\nwidget.addSpacer(12);\n\nconst formatter = new DateFormatter();\nformatter.dateFormat = \"MM-dd HH:mm\";\nconst footer = widget.addText(\"更新于 \" + formatter.string(new Date()));\nfooter.textColor = new Color(\"8898BC\");\nfooter.font = Font.systemFont(10);\n\nScript.setWidget(widget);\nawait widget.presentMedium();\nconsole.log(\"小组件已生成，点击预览下方按钮可添加到主屏幕。\");\nconsole.log(\"每个桌面小组件可配置独立脚本、参数与后台刷新。\");\n"
+  },
+  {
+    "id": "example-notes",
+    "name": "随手记一笔",
+    "description": "把灵感写入本地文本文件。再次运行时会读回之前保存的内容。",
+    "category": "本地文件",
+    "color": "#ed9461",
+    "icon": "note",
+    "code": "// 写入与读取应用内的本地文件\nconst fm = FileManager.local();\nconst path = fm.joinPath(fm.documentsDirectory(), \"my-note.txt\");\nconst previous = fm.fileExists(path) ? fm.readString(path) : \"\";\n\nconst alert = new Alert();\nalert.title = \"随手记一笔\";\nalert.message = \"内容会保存在这台设备的应用目录中。\";\nalert.addTextField(\"今天有什么想法？\", previous);\nalert.addAction(\"保存\");\nalert.addCancelAction(\"取消\");\n\nif (await alert.presentAlert() === 0) {\n  const note = alert.textFieldValue(0);\n  fm.writeString(path, note);\n  console.log(\"保存成功：\" + path);\n  console.log(fm.readString(path));\n} else {\n  console.log(\"已取消，原来的笔记仍然保留。\");\n}\n"
+  },
+  {
+    "id": "example-request",
+    "name": "获取在线数据",
+    "description": "请求一个公开 HTTPS 接口，读取 JSON，并在控制台中查看结果。",
+    "category": "网络请求",
+    "color": "#af80d7",
+    "icon": "globe",
+    "code": "// 使用公开演示接口，需要网络连接\nconst request = new Request(\"https://jsonplaceholder.typicode.com/todos/1\");\nrequest.timeoutInterval = 15;\n\ntry {\n  const todo = await request.loadJSON();\n  console.log(\"HTTP 状态：\" + request.response.statusCode);\n  console.log(\"任务：\" + todo.title);\n  console.log(\"完成状态：\" + (todo.completed ? \"已完成\" : \"待完成\"));\n  await QuickLook.present(todo);\n} catch (error) {\n  console.error(\"请求失败：\" + error.message);\n  console.log(\"请确认手机可以访问该 HTTPS 接口，然后重试。\");\n}\n"
+  },
+  {
+    "id": "example-clipboard",
+    "name": "剪贴板文字工具",
+    "description": "读取剪贴板，整理首尾空白与空行，再把结果复制回去。",
+    "category": "系统工具",
+    "color": "#71ac87",
+    "icon": "clipboard",
+    "code": "// 剪贴板读取需要在前台运行；浏览器可能需要授权\nconst text = await Pasteboard.readString();\nif (!text || !text.trim()) {\n  console.log(\"剪贴板中没有文字。先复制一段文字再试试。\");\n} else {\n  const cleaned = text.trim().replace(/\\n{3,}/g, \"\\n\\n\");\n  Pasteboard.copyString(cleaned);\n  console.log(\"已整理并复制 \" + cleaned.length + \" 个字符。\");\n  console.log(cleaned);\n}\n"
+  },
+  {
+    "id": "example-date",
+    "name": "今天的小卡片",
+    "description": "用日期格式化与小组件文字排版，制作每日问候卡片。",
+    "category": "日期与排版",
+    "color": "#df7e99",
+    "icon": "calendar",
+    "code": "const now = new Date();\nconst date = new DateFormatter();\ndate.locale = \"zh-CN\";\ndate.dateFormat = \"MM月dd日 EEEE\";\n\nconst widget = new ListWidget();\nwidget.backgroundColor = new Color(\"FFF0EC\");\nwidget.setPadding(20, 20, 20, 20);\nconst title = widget.addText(\"今天也，慢慢来。\");\ntitle.font = Font.boldSystemFont(21);\ntitle.textColor = new Color(\"84574D\");\nwidget.addSpacer(12);\nconst subtitle = widget.addText(date.string(now));\nsubtitle.font = Font.systemFont(13);\nsubtitle.textColor = new Color(\"B08275\");\nwidget.addSpacer(6);\nconst caption = widget.addText(\"做一件让自己开心的小事。\");\ncaption.font = Font.systemFont(12);\ncaption.textColor = new Color(\"B08275\");\nScript.setWidget(widget);\nawait widget.presentMedium();\n"
+  },
+  {
+    "id": "example-module",
+    "name": "我的第一个模块",
+    "description": "创建一个本地 CommonJS 模块，再用 importModule 复用它的函数。",
+    "category": "代码复用",
+    "color": "#668bc6",
+    "icon": "layers",
+    "code": "// 模块保存在应用的 documents 目录中\nconst fm = FileManager.local();\nconst modulePath = fm.joinPath(fm.documentsDirectory(), \"greeting-tools.js\");\nfm.writeString(modulePath, 'module.exports = { greet: name => \"你好，\" + name + \"！\" };');\n\nconst tools = importModule(\"greeting-tools\");\nconsole.log(tools.greet(\"Android\"));\nconsole.log(\"你也可以导入脚本库中同名脚本导出的 module.exports。\");\n"
+  },
+  {
+    "id": "example-notification",
+    "name": "给自己发个提醒",
+    "description": "立即发送一条 Android 系统通知。首次使用时系统可能请求通知权限。",
+    "category": "原生通知",
+    "color": "#ad9b60",
+    "icon": "bell",
+    "code": "// 此示例需要安装 Android 应用\nconst notice = new Notification();\nnotice.title = \"来自你的小脚本\";\nnotice.body = \"伸个懒腰，喝一口水。今天也辛苦了。\";\ntry {\n  await notice.schedule();\n  console.log(\"通知已发送。\");\n} catch (error) {\n  console.error(\"通知未发送：\" + error.message);\n  console.log(\"请检查 Android 通知权限。此版本只支持立即通知。\");\n}\n"
+  },
+  {
+    "id": "example-graphics",
+    "name": "曲线画布",
+    "description": "离线绘制曲线、圆形和文字，查看真实 PNG 图片。",
+    "category": "绘图",
+    "color": "#6370ee",
+    "icon": "edit",
+    "code": "const d=new DrawContext();d.size=new Size(320,180);d.opaque=false;\nd.setFillColor(new Color('EEF1FF'));d.fillRect(new Rect(0,0,320,180));\nd.setFillColor(new Color('5A5DE8'));d.fillEllipse(new Rect(220,25,60,60));\nconst p=new Path();p.move(new Point(20,120));p.addCurve(new Point(300,120),new Point(80,15),new Point(230,190));\nd.addPath(p);d.setStrokeColor(new Color('23A8BA'));d.setLineWidth(5);d.strokePath();\nd.setFont(Font.boldRoundedSystemFont(18));d.setTextColor(new Color('303B5B'));d.drawText('用代码画一幅小画',new Point(20,145));\nawait QuickLook.present(d.getImage(),true);"
+  },
+  {
+    "id": "example-symbols",
+    "name": "安卓图标实验室",
+    "description": "查看原创和 Material Design 图标，了解实际平台映射。",
+    "category": "图标",
+    "color": "#46a6bd",
+    "icon": "layers",
+    "code": "const w=new ListWidget();w.backgroundColor=new Color('172442');\nconst row=w.addStack();row.layoutHorizontally();row.spacing=18;\nfor(const name of ['sun.max.fill','cloud.heavyrain.fill','person.3.fill']){const s=SFSymbol.named(name);s.applyFont(Font.systemFont(40));const image=row.addImage(s.image);image.tintColor=Color.white();image.imageSize=new Size(40,40);console.log(name,s.platformIcon,s.isFallback);}\nw.addSpacer(12);w.addText('原创与 Android 语义图标').textColor=Color.white();await w.presentMedium();"
+  },
+  {
+    "id": "example-gradient",
+    "name": "渐变时钟组件",
+    "description": "组合渐变、时间与轻量布局，可为每个实例配置参数。",
+    "category": "小组件",
+    "color": "#af80d7",
+    "icon": "widget",
+    "code": "const w=new ListWidget();const g=new LinearGradient();g.colors=[new Color('5A5DE8'),new Color('23A8BA')];g.locations=[0,1];g.startPoint=new Point(0,0);g.endPoint=new Point(1,1);w.backgroundGradient=g;w.setPadding(22,22,22,22);\nconst title=w.addText(args.widgetParameter||'今天也值得期待');title.textColor=Color.white();title.font=Font.boldSystemFont(18);w.addSpacer(12);\nconst date=w.addDate(new Date());date.applyTimeStyle();date.font=Font.boldRoundedSystemFont(30);date.textColor=Color.white();w.refreshAfterDate=new Date(Date.now()+30*60*1000);Script.setWidget(w);await w.presentMedium();"
+  },
+  {
+    "id": "example-xml",
+    "name": "解析本地 XML",
+    "description": "用事件回调读取本地 XML，不访问网络。",
+    "category": "数据处理",
+    "color": "#71ac87",
+    "icon": "code",
+    "code": "const p=new XMLParser('<items><item id=\"1\">你好</item></items>');\np.didStartElement=(name,attributes)=>console.log(name,attributes);\np.foundCharacters=text=>console.log(text);\np.parseErrorOccurred=error=>console.error(error.message);\nconsole.log(p.parse());"
+  },
+  {
+    "id": "example-table",
+    "name": "互动清单表格",
+    "description": "点击原生表格行，在控制台查看选择结果。",
+    "category": "界面",
+    "color": "#668bc6",
+    "icon": "grid",
+    "code": "const table=new UITable();table.showSeparators=true;for(const title of ['散步十分钟','读一页书','喝一杯水']){const row=new UITableRow();row.height=64;row.addText(title,'点一下，记录本次选择');row.onSelect=()=>console.log('已选择：'+title);row.dismissOnSelect=false;table.addRow(row);}await table.present();"
+  },
+  {
+    "id": "example-html",
+    "name": "离线网页实验",
+    "description": "在隔离网页运行 JavaScript，整个示例无需联网。",
+    "category": "网页",
+    "color": "#6370ee",
+    "icon": "globe",
+    "code": "const view=new WebView();\nawait view.loadHTML(\"<!doctype html><meta name=\\\"viewport\\\" content=\\\"width=device-width\\\"><body style=\\\"font-family:sans-serif;background:#eef1ff;padding:24px;color:#263457\\\"><h1>本地网页</h1><p id=\\\"result\\\">等待计算</p><button onclick=\\\"document.getElementById('result').textContent='你好，Android！'\\\">打个招呼</button></body>\");\nconsole.log('计算结果',await view.evaluateJavaScript('6*7'));\nawait view.present();"
+  },
+  {
+    "id": "example-triggers",
+    "name": "通知与日期触发",
+    "description": "手动运行后发送一条通知，并安排两分钟后的一次提醒。",
+    "category": "系统通知",
+    "color": "#df7e99",
+    "icon": "bell",
+    "code": "const now=new Notification();now.title='脚本已运行';now.body='这是即时通知示例';await now.schedule();\nconst later=new Notification();later.title='两分钟过去了';later.body='这是一次日期触发示例';later.setTriggerDate(new Date(Date.now()+120000));await later.schedule();console.log('已安排提醒',later.identifier);"
+  },
+  {
+    "id": "example-location-read",
+    "name": "只读定位",
+    "description": "授权后只在本机显示坐标，不查询地址、不上传位置。",
+    "category": "需要定位权限",
+    "color": "#46a6bd",
+    "icon": "device",
+    "code": "Location.setAccuracyToHundredMeters();\nconst location=await Location.current();\nconsole.log(location.latitude,location.longitude);"
+  },
+  {
+    "id": "example-counts-read",
+    "name": "日历与联系人计数",
+    "description": "授权后只统计数量，不显示个人内容，不修改数据。",
+    "category": "需要系统权限",
+    "color": "#ad9b60",
+    "icon": "calendar",
+    "code": "const calendars=await Calendar.forEvents();console.log('日历账户数量',calendars.length);const events=await CalendarEvent.today();console.log('今天的事件数量',events.length);const contacts=await Contact.all();console.log('联系人数量',contacts.length);"
+  },
+  {
+    "id": "example-widget-parameter",
+    "name": "独立组件参数",
+    "description": "在组件设置填写一句话，不同实例显示不同内容。",
+    "category": "小组件参数",
+    "color": "#ed9461",
+    "icon": "widget",
+    "code": "const w=new ListWidget();w.backgroundColor=new Color('243453');const t=w.addText(String(args.widgetParameter||'请在组件设置填写一句话'));t.textColor=Color.white();t.font=Font.boldSystemFont(20);w.addSpacer(12);w.addText('脚本：'+Script.name()).textColor=new Color('A8B8D8');Script.setWidget(w);if(!config.runsInWidget)await w.presentMedium();"
+  },
+  {
+    "id": "example-self-read",
+    "name": "读取自己的脚本",
+    "description": "只读取脚本库中的真实文件镜像，统计行数和长度。",
+    "category": "脚本文件",
+    "color": "#71ac87",
+    "icon": "folder",
+    "code": "const fm=FileManager.local();const path=fm.joinPath(fm.documentsDirectory(),Script.name()+'.js');const source=fm.readString(path);console.log('文件路径',path);console.log('行数',source.split(String.fromCharCode(10)).length);console.log('字符数',source.length);"
+  },
+  {
+    "id": "example-shortcut-uri",
+    "name": "快捷入口链接",
+    "description": "生成当前脚本运行链接，用于 Android 快捷入口或自动化应用。",
+    "category": "运行链接",
+    "color": "#af80d7",
+    "icon": "bolt",
+    "code": "console.log('当前脚本运行链接：');console.log(URLScheme.forRunningScript());console.log('将链接配置到支持 URI 的 Android 自动化应用。');"
+  }
+]

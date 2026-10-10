@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Scriptable Android</string>
+    <string name="widget_description">显示脚本最近生成的小组件，点击打开脚本。</string>
+</resources>

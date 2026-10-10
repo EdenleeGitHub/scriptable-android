@@ -1,0 +1,52 @@
+plugins { id 'com.android.application' }
+
+def signingFile = new File(System.getenv('SCRIPTABLE_SIGNING_PROPERTIES') ?: "${System.getProperty('user.home')}/.android/scriptable-android/signing.properties")
+def signingValues = new Properties()
+if (signingFile.exists()) signingFile.withInputStream { signingValues.load(it) }
+
+android {
+    namespace 'dev.scriptable.android'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'dev.scriptable.android'
+        minSdk 26
+        targetSdk 35
+        versionCode 3
+        versionName '0.2.1'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    if (signingFile.exists()) {
+        signingConfigs {
+            release {
+                storeFile file(signingValues['storeFile'])
+                storePassword signingValues['storePassword']
+                keyAlias signingValues['keyAlias']
+                keyPassword signingValues['keyPassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (signingFile.exists()) signingConfig signingConfigs.release
+        }
+    }
+    lint { abortOnError true }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            def cachedSdk = new File("${System.getProperty('user.home')}/.m2/repository/org/robolectric/android-all-instrumented/9-robolectric-4913185-2-i7")
+            if (new File(cachedSdk, 'android-all-instrumented-9-robolectric-4913185-2-i7.jar').exists()) {
+                systemProperty 'robolectric.offline', 'true'
+                systemProperty 'robolectric.dependency.dir', cachedSdk.absolutePath
+            }
+        }
+    }
+}
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.16.1'
+}

@@ -1,0 +1,14 @@
+{
+  "name": "scriptable-android",
+  "version": "0.2.1",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/runtime.test.cjs tests/graphics.test.cjs tests/system.test.cjs tests/presentation.test.cjs tests/extra.test.cjs tests/compat.test.cjs tests/library.test.cjs tests/platform.test.cjs tests/symbols.test.cjs tests/demos.test.cjs",
+    "test:ui": "node tests/ui.test.cjs && node tests/presentation-browser.test.cjs && node tests/style.test.cjs && node tests/integration.test.cjs",
+    "preview": "node tools/preview.cjs"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.0.10",
+    "playwright": "1.56.1"
+  }
+}

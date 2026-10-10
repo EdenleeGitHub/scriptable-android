@@ -1,0 +1,23 @@
+Android symbol compatibility assets
+
+Material Design Icons Webfont 7.4.47
+Source: https://github.com/Templarian/MaterialDesign-Webfont
+npm: @mdi/font@7.4.47
+Font and icons: Apache License 2.0; see APACHE-2.0.txt and MDI-LICENSE.txt.
+The font is copied without changes. mdi-map.json is generated from the
+package's CSS name/codepoint mappings. The mapping format was changed to JSON.
+mdi.ttf SHA-256: 61e8aba5a4e981fe22cf7c8e8bcdbea00476e75c62c37f01bf7ee33361d68428
+
+SF symbol identifier metadata
+Source: https://github.com/nandorojo/typescript-sf-symbols
+npm: sf-symbols-typescript@2.2.0
+Copyright (c) 2023 Fernando Rojo. MIT; see SF-NAMES-LICENSE.txt.
+sf-symbol-names.json contains names extracted from the TypeScript type unions
+through the package's SF Symbols 7.0 version. The format was changed to JSON.
+
+No Apple font, SF Symbols artwork, SVG, bitmap, or other graphical asset is
+included. Names identify compatibility calls. Rendering uses independent
+original vectors or Material Design Icons equivalents, with visibly disclosed
+generic fallbacks where a suitable semantic equivalent is unavailable.
+Apple and SF Symbols are trademarks of their respective owners. This app
+and these Android equivalents are not affiliated with or endorsed by Apple.

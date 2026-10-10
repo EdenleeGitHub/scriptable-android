@@ -1,0 +1,1092 @@
+[
+  {
+    "type": "alert",
+    "source": "https://docs.scriptable.app/alert/",
+    "members": [
+      "title",
+      "message",
+      "-new Alert",
+      "-addAction",
+      "-addDestructiveAction",
+      "-addCancelAction",
+      "-addTextField",
+      "-addSecureTextField",
+      "-textFieldValue",
+      "-present",
+      "-presentAlert",
+      "-presentSheet"
+    ]
+  },
+  {
+    "type": "args",
+    "source": "https://docs.scriptable.app/args/",
+    "members": [
+      "length",
+      "all",
+      "plainTexts",
+      "urls",
+      "fileURLs",
+      "images",
+      "queryParameters",
+      "siriShortcutArguments",
+      "shortcutParameter",
+      "widgetParameter",
+      "notification"
+    ]
+  },
+  {
+    "type": "calendar",
+    "source": "https://docs.scriptable.app/calendar/",
+    "members": [
+      "identifier",
+      "title",
+      "isSubscribed",
+      "allowsContentModifications",
+      "color",
+      "-supportsAvailability",
+      "-save",
+      "-remove",
+      "+forReminders",
+      "+forEvents",
+      "+forRemindersByTitle",
+      "+forEventsByTitle",
+      "+createForReminders",
+      "+findOrCreateForReminders",
+      "+defaultForReminders",
+      "+defaultForEvents",
+      "+presentPicker"
+    ]
+  },
+  {
+    "type": "calendarevent",
+    "source": "https://docs.scriptable.app/calendarevent/",
+    "members": [
+      "identifier",
+      "title",
+      "location",
+      "notes",
+      "startDate",
+      "endDate",
+      "isAllDay",
+      "attendees",
+      "availability",
+      "timeZone",
+      "calendar",
+      "-new CalendarEvent",
+      "-addRecurrenceRule",
+      "-removeAllRecurrenceRules",
+      "-save",
+      "-remove",
+      "-presentEdit",
+      "+presentCreate",
+      "+today",
+      "+tomorrow",
+      "+yesterday",
+      "+thisWeek",
+      "+nextWeek",
+      "+lastWeek",
+      "+between"
+    ]
+  },
+  {
+    "type": "callbackurl",
+    "source": "https://docs.scriptable.app/callbackurl/",
+    "members": [
+      "-new CallbackURL",
+      "-addParameter",
+      "-open",
+      "-getURL"
+    ]
+  },
+  {
+    "type": "color",
+    "source": "https://docs.scriptable.app/color/",
+    "members": [
+      "hex",
+      "red",
+      "green",
+      "blue",
+      "alpha",
+      "+black",
+      "+darkGray",
+      "+lightGray",
+      "+white",
+      "+gray",
+      "+red",
+      "+green",
+      "+blue",
+      "+cyan",
+      "+yellow",
+      "+magenta",
+      "+orange",
+      "+purple",
+      "+brown",
+      "+clear",
+      "-new Color",
+      "+dynamic"
+    ]
+  },
+  {
+    "type": "config",
+    "source": "https://docs.scriptable.app/config/",
+    "members": [
+      "runsInApp",
+      "runsInActionExtension",
+      "runsWithSiri",
+      "runsInWidget",
+      "runsInAccessoryWidget",
+      "runsInNotification",
+      "runsFromHomeScreen",
+      "widgetFamily"
+    ]
+  },
+  {
+    "type": "console",
+    "source": "https://docs.scriptable.app/console/",
+    "members": [
+      "+log",
+      "+warn",
+      "+error",
+      "+logError"
+    ]
+  },
+  {
+    "type": "contact",
+    "source": "https://docs.scriptable.app/contact/",
+    "members": [
+      "identifier",
+      "namePrefix",
+      "givenName",
+      "middleName",
+      "familyName",
+      "nickname",
+      "birthday",
+      "image",
+      "emailAddresses",
+      "phoneNumbers",
+      "postalAddresses",
+      "socialProfiles",
+      "note",
+      "urlAddresses",
+      "dates",
+      "organizationName",
+      "departmentName",
+      "jobTitle",
+      "isNamePrefixAvailable",
+      "isGiveNameAvailable",
+      "isMiddleNameAvailable",
+      "isFamilyNameAvailable",
+      "isNicknameAvailable",
+      "isBirthdayAvailable",
+      "isEmailAddressesAvailable",
+      "isPhoneNumbersAvailable",
+      "isPostalAddressesAvailable",
+      "isSocialProfilesAvailable",
+      "isImageAvailable",
+      "isNoteAvailable",
+      "isURLAddressesAvailable",
+      "isOrganizationNameAvailable",
+      "isDepartmentNameAvailable",
+      "isJobTitleAvailable",
+      "isDatesAvailable",
+      "-new Contact",
+      "+all",
+      "+inGroups",
+      "+add",
+      "+update",
+      "+delete",
+      "+persistChanges"
+    ]
+  },
+  {
+    "type": "contactscontainer",
+    "source": "https://docs.scriptable.app/contactscontainer/",
+    "members": [
+      "identifier",
+      "name",
+      "+default",
+      "+all",
+      "+withIdentifier"
+    ]
+  },
+  {
+    "type": "contactsgroup",
+    "source": "https://docs.scriptable.app/contactsgroup/",
+    "members": [
+      "identifier",
+      "name",
+      "-new ContactsGroup",
+      "+all",
+      "-addMember",
+      "-removeMember",
+      "+add",
+      "+update",
+      "+delete"
+    ]
+  },
+  {
+    "type": "data",
+    "source": "https://docs.scriptable.app/data/",
+    "members": [
+      "+fromString",
+      "+fromFile",
+      "+fromBase64String",
+      "+fromJPEG",
+      "+fromPNG",
+      "+fromBytes",
+      "-toRawString",
+      "-toBase64String",
+      "-getBytes"
+    ]
+  },
+  {
+    "type": "dateformatter",
+    "source": "https://docs.scriptable.app/dateformatter/",
+    "members": [
+      "dateFormat",
+      "locale",
+      "-new DateFormatter",
+      "-string",
+      "-date",
+      "-useNoDateStyle",
+      "-useShortDateStyle",
+      "-useMediumDateStyle",
+      "-useLongDateStyle",
+      "-useFullDateStyle",
+      "-useNoTimeStyle",
+      "-useShortTimeStyle",
+      "-useMediumTimeStyle",
+      "-useLongTimeStyle",
+      "-useFullTimeStyle"
+    ]
+  },
+  {
+    "type": "datepicker",
+    "source": "https://docs.scriptable.app/datepicker/",
+    "members": [
+      "minimumDate",
+      "maximumDate",
+      "countdownDuration",
+      "minuteInterval",
+      "initialDate",
+      "-new DatePicker",
+      "-pickTime",
+      "-pickDate",
+      "-pickDateAndTime",
+      "-pickCountdownDuration"
+    ]
+  },
+  {
+    "type": "device",
+    "source": "https://docs.scriptable.app/device/",
+    "members": [
+      "+name",
+      "+systemName",
+      "+systemVersion",
+      "+model",
+      "+isPhone",
+      "+isPad",
+      "+screenSize",
+      "+screenResolution",
+      "+screenScale",
+      "+screenBrightness",
+      "+isInPortrait",
+      "+isInPortraitUpsideDown",
+      "+isInLandscapeLeft",
+      "+isInLandscapeRight",
+      "+isFaceUp",
+      "+isFaceDown",
+      "+batteryLevel",
+      "+isDischarging",
+      "+isCharging",
+      "+isFullyCharged",
+      "+preferredLanguages",
+      "+locale",
+      "+language",
+      "+isUsingDarkAppearance",
+      "+volume",
+      "+setScreenBrightness"
+    ]
+  },
+  {
+    "type": "dictation",
+    "source": "https://docs.scriptable.app/dictation/",
+    "members": [
+      "+start"
+    ]
+  },
+  {
+    "type": "documentpicker",
+    "source": "https://docs.scriptable.app/documentpicker/",
+    "members": [
+      "+open",
+      "+openFile",
+      "+openFolder",
+      "+export",
+      "+exportString",
+      "+exportImage",
+      "+exportData"
+    ]
+  },
+  {
+    "type": "drawcontext",
+    "source": "https://docs.scriptable.app/drawcontext/",
+    "members": [
+      "size",
+      "respectScreenScale",
+      "opaque",
+      "-new DrawContext",
+      "-getImage",
+      "-drawImageInRect",
+      "-drawImageAtPoint",
+      "-setFillColor",
+      "-setStrokeColor",
+      "-setLineWidth",
+      "-fill",
+      "-fillRect",
+      "-fillEllipse",
+      "-stroke",
+      "-strokeRect",
+      "-strokeEllipse",
+      "-addPath",
+      "-strokePath",
+      "-fillPath",
+      "-drawText",
+      "-drawTextInRect",
+      "-setFontSize",
+      "-setFont",
+      "-setTextColor",
+      "-setTextAlignedLeft",
+      "-setTextAlignedCenter",
+      "-setTextAlignedRight"
+    ]
+  },
+  {
+    "type": "filemanager",
+    "source": "https://docs.scriptable.app/filemanager/",
+    "members": [
+      "+local",
+      "+iCloud",
+      "-read",
+      "-readString",
+      "-readImage",
+      "-write",
+      "-writeString",
+      "-writeImage",
+      "-remove",
+      "-move",
+      "-copy",
+      "-fileExists",
+      "-isDirectory",
+      "-createDirectory",
+      "-temporaryDirectory",
+      "-cacheDirectory",
+      "-documentsDirectory",
+      "-libraryDirectory",
+      "-joinPath",
+      "-allTags",
+      "-addTag",
+      "-removeTag",
+      "-readExtendedAttribute",
+      "-writeExtendedAttribute",
+      "-removeExtendedAttribute",
+      "-allExtendedAttributes",
+      "-getUTI",
+      "-listContents",
+      "-fileName",
+      "-fileExtension",
+      "-bookmarkedPath",
+      "-bookmarkExists",
+      "-downloadFileFromiCloud",
+      "-isFileStoredIniCloud",
+      "-isFileDownloaded",
+      "-creationDate",
+      "-modificationDate",
+      "-fileSize",
+      "-allFileBookmarks"
+    ]
+  },
+  {
+    "type": "font",
+    "source": "https://docs.scriptable.app/font/",
+    "members": [
+      "-new Font",
+      "+largeTitle",
+      "+title1",
+      "+title2",
+      "+title3",
+      "+headline",
+      "+subheadline",
+      "+body",
+      "+callout",
+      "+footnote",
+      "+caption1",
+      "+caption2",
+      "+systemFont",
+      "+ultraLightSystemFont",
+      "+thinSystemFont",
+      "+lightSystemFont",
+      "+regularSystemFont",
+      "+mediumSystemFont",
+      "+semiboldSystemFont",
+      "+boldSystemFont",
+      "+heavySystemFont",
+      "+blackSystemFont",
+      "+italicSystemFont",
+      "+ultraLightMonospacedSystemFont",
+      "+thinMonospacedSystemFont",
+      "+lightMonospacedSystemFont",
+      "+regularMonospacedSystemFont",
+      "+mediumMonospacedSystemFont",
+      "+semiboldMonospacedSystemFont",
+      "+boldMonospacedSystemFont",
+      "+heavyMonospacedSystemFont",
+      "+blackMonospacedSystemFont",
+      "+ultraLightRoundedSystemFont",
+      "+thinRoundedSystemFont",
+      "+lightRoundedSystemFont",
+      "+regularRoundedSystemFont",
+      "+mediumRoundedSystemFont",
+      "+semiboldRoundedSystemFont",
+      "+boldRoundedSystemFont",
+      "+heavyRoundedSystemFont",
+      "+blackRoundedSystemFont"
+    ]
+  },
+  {
+    "type": "image",
+    "source": "https://docs.scriptable.app/image/",
+    "members": [
+      "size",
+      "+fromFile",
+      "+fromData"
+    ]
+  },
+  {
+    "type": "importmodule",
+    "source": "https://docs.scriptable.app/importmodule/",
+    "members": []
+  },
+  {
+    "type": "keychain",
+    "source": "https://docs.scriptable.app/keychain/",
+    "members": [
+      "+contains",
+      "+set",
+      "+get",
+      "+remove"
+    ]
+  },
+  {
+    "type": "lineargradient",
+    "source": "https://docs.scriptable.app/lineargradient/",
+    "members": [
+      "colors",
+      "locations",
+      "startPoint",
+      "endPoint",
+      "-new LinearGradient"
+    ]
+  },
+  {
+    "type": "listwidget",
+    "source": "https://docs.scriptable.app/listwidget/",
+    "members": [
+      "backgroundColor",
+      "backgroundImage",
+      "backgroundGradient",
+      "addAccessoryWidgetBackground",
+      "spacing",
+      "url",
+      "refreshAfterDate",
+      "-new ListWidget",
+      "-addText",
+      "-addDate",
+      "-addImage",
+      "-addSpacer",
+      "-addStack",
+      "-setPadding",
+      "-useDefaultPadding",
+      "-presentSmall",
+      "-presentMedium",
+      "-presentLarge",
+      "-presentExtraLarge",
+      "-presentAccessoryInline",
+      "-presentAccessoryCircular",
+      "-presentAccessoryRectangular"
+    ]
+  },
+  {
+    "type": "location",
+    "source": "https://docs.scriptable.app/location/",
+    "members": [
+      "+current",
+      "+setAccuracyToBest",
+      "+setAccuracyToTenMeters",
+      "+setAccuracyToHundredMeters",
+      "+setAccuracyToKilometer",
+      "+setAccuracyToThreeKilometers",
+      "+reverseGeocode"
+    ]
+  },
+  {
+    "type": "mail",
+    "source": "https://docs.scriptable.app/mail/",
+    "members": [
+      "toRecipients",
+      "ccRecipients",
+      "bccRecipients",
+      "subject",
+      "body",
+      "isBodyHTML",
+      "preferredSendingEmailAddress",
+      "-new Mail",
+      "-send",
+      "-addImageAttachment",
+      "-addFileAttachment",
+      "-addDataAttachment"
+    ]
+  },
+  {
+    "type": "message",
+    "source": "https://docs.scriptable.app/message/",
+    "members": [
+      "recipients",
+      "body",
+      "-new Message",
+      "-send",
+      "-addImageAttachment",
+      "-addFileAttachment",
+      "-addDataAttachment"
+    ]
+  },
+  {
+    "type": "module",
+    "source": "https://docs.scriptable.app/module/",
+    "members": [
+      "filename",
+      "exports"
+    ]
+  },
+  {
+    "type": "notification",
+    "source": "https://docs.scriptable.app/notification/",
+    "members": [
+      "identifier",
+      "title",
+      "subtitle",
+      "body",
+      "preferredContentHeight",
+      "badge",
+      "threadIdentifier",
+      "userInfo",
+      "sound",
+      "openURL",
+      "deliveryDate",
+      "nextTriggerDate",
+      "scriptName",
+      "actions",
+      "+current",
+      "-new Notification",
+      "-schedule",
+      "-remove",
+      "-setTriggerDate",
+      "-setDailyTrigger",
+      "-setWeeklyTrigger",
+      "-addAction",
+      "+allPending",
+      "+allDelivered",
+      "+removeAllPending",
+      "+removeAllDelivered",
+      "+removePending",
+      "+removeDelivered",
+      "+resetCurrent"
+    ]
+  },
+  {
+    "type": "pasteboard",
+    "source": "https://docs.scriptable.app/pasteboard/",
+    "members": [
+      "+copy",
+      "+paste",
+      "+copyString",
+      "+pasteString",
+      "+copyImage",
+      "+pasteImage"
+    ]
+  },
+  {
+    "type": "path",
+    "source": "https://docs.scriptable.app/path/",
+    "members": [
+      "-new Path",
+      "-move",
+      "-addLine",
+      "-addRect",
+      "-addEllipse",
+      "-addRoundedRect",
+      "-addCurve",
+      "-addQuadCurve",
+      "-addLines",
+      "-addRects",
+      "-closeSubpath"
+    ]
+  },
+  {
+    "type": "photos",
+    "source": "https://docs.scriptable.app/photos/",
+    "members": [
+      "+fromLibrary",
+      "+fromCamera",
+      "+latestPhoto",
+      "+latestPhotos",
+      "+latestScreenshot",
+      "+latestScreenshots",
+      "+removeLatestPhoto",
+      "+removeLatestPhotos",
+      "+removeLatestScreenshot",
+      "+removeLatestScreenshots",
+      "+save"
+    ]
+  },
+  {
+    "type": "point",
+    "source": "https://docs.scriptable.app/point/",
+    "members": [
+      "x",
+      "y",
+      "-new Point"
+    ]
+  },
+  {
+    "type": "quicklook",
+    "source": "https://docs.scriptable.app/quicklook/",
+    "members": [
+      "+present"
+    ]
+  },
+  {
+    "type": "rect",
+    "source": "https://docs.scriptable.app/rect/",
+    "members": [
+      "minX",
+      "minY",
+      "maxX",
+      "maxY",
+      "x",
+      "y",
+      "width",
+      "height",
+      "origin",
+      "size",
+      "-new Rect"
+    ]
+  },
+  {
+    "type": "recurrencerule",
+    "source": "https://docs.scriptable.app/recurrencerule/",
+    "members": [
+      "+daily",
+      "+dailyEndDate",
+      "+dailyOccurrenceCount",
+      "+weekly",
+      "+weeklyEndDate",
+      "+weeklyOccurrenceCount",
+      "+monthly",
+      "+monthlyEndDate",
+      "+monthlyOccurrenceCount",
+      "+yearly",
+      "+yearlyEndDate",
+      "+yearlyOccurrenceCount",
+      "+complexWeekly",
+      "+complexWeeklyEndDate",
+      "+complexWeeklyOccurrenceCount",
+      "+complexMonthly",
+      "+complexMonthlyEndDate",
+      "+complexMonthlyOccurrenceCount",
+      "+complexYearly",
+      "+complexYearlyEndDate",
+      "+complexYearlyOccurrenceCount"
+    ]
+  },
+  {
+    "type": "relativedatetimeformatter",
+    "source": "https://docs.scriptable.app/relativedatetimeformatter/",
+    "members": [
+      "locale",
+      "-new RelativeDateTimeFormatter",
+      "-string",
+      "-useNamedDateTimeStyle",
+      "-useNumericDateTimeStyle"
+    ]
+  },
+  {
+    "type": "reminder",
+    "source": "https://docs.scriptable.app/reminder/",
+    "members": [
+      "identifier",
+      "title",
+      "notes",
+      "isCompleted",
+      "isOverdue",
+      "priority",
+      "dueDate",
+      "dueDateIncludesTime",
+      "completionDate",
+      "creationDate",
+      "calendar",
+      "-new Reminder",
+      "-addRecurrenceRule",
+      "-removeAllRecurrenceRules",
+      "-save",
+      "-remove",
+      "+scheduled",
+      "+all",
+      "+allCompleted",
+      "+allIncomplete",
+      "+allDueToday",
+      "+completedDueToday",
+      "+incompleteDueToday",
+      "+allDueTomorrow",
+      "+completedDueTomorrow",
+      "+incompleteDueTomorrow",
+      "+allDueYesterday",
+      "+completedDueYesterday",
+      "+incompleteDueYesterday",
+      "+allDueThisWeek",
+      "+completedDueThisWeek",
+      "+incompleteDueThisWeek",
+      "+allDueNextWeek",
+      "+completedDueNextWeek",
+      "+incompleteDueNextWeek",
+      "+allDueLastWeek",
+      "+completedDueLastWeek",
+      "+incompleteDueLastWeek",
+      "+completedToday",
+      "+completedThisWeek",
+      "+completedLastWeek",
+      "+allDueBetween",
+      "+completedDueBetween",
+      "+incompleteDueBetween",
+      "+completedBetween"
+    ]
+  },
+  {
+    "type": "request",
+    "source": "https://docs.scriptable.app/request/",
+    "members": [
+      "url",
+      "method",
+      "headers",
+      "body",
+      "timeoutInterval",
+      "onRedirect",
+      "response",
+      "allowInsecureRequest",
+      "-new Request",
+      "-load",
+      "-loadString",
+      "-loadJSON",
+      "-loadImage",
+      "-addParameterToMultipart",
+      "-addFileDataToMultipart",
+      "-addFileToMultipart",
+      "-addImageToMultipart"
+    ]
+  },
+  {
+    "type": "safari",
+    "source": "https://docs.scriptable.app/safari/",
+    "members": [
+      "+openInApp",
+      "+open"
+    ]
+  },
+  {
+    "type": "script",
+    "source": "https://docs.scriptable.app/script/",
+    "members": [
+      "+name",
+      "+complete",
+      "+setShortcutOutput",
+      "+setWidget"
+    ]
+  },
+  {
+    "type": "sfsymbol",
+    "source": "https://docs.scriptable.app/sfsymbol/",
+    "members": [
+      "image",
+      "+named",
+      "-applyFont",
+      "-applyUltraLightWeight",
+      "-applyThinWeight",
+      "-applyLightWeight",
+      "-applyRegularWeight",
+      "-applyMediumWeight",
+      "-applySemiboldWeight",
+      "-applyBoldWeight",
+      "-applyHeavyWeight",
+      "-applyBlackWeight"
+    ]
+  },
+  {
+    "type": "sharesheet",
+    "source": "https://docs.scriptable.app/sharesheet/",
+    "members": [
+      "+present"
+    ]
+  },
+  {
+    "type": "size",
+    "source": "https://docs.scriptable.app/size/",
+    "members": [
+      "width",
+      "height",
+      "-new Size"
+    ]
+  },
+  {
+    "type": "speech",
+    "source": "https://docs.scriptable.app/speech/",
+    "members": [
+      "+speak"
+    ]
+  },
+  {
+    "type": "textfield",
+    "source": "https://docs.scriptable.app/textfield/",
+    "members": [
+      "text",
+      "placeholder",
+      "isSecure",
+      "textColor",
+      "font",
+      "-setDefaultKeyboard",
+      "-setNumberPadKeyboard",
+      "-setDecimalPadKeyboard",
+      "-setNumbersAndPunctuationKeyboard",
+      "-setPhonePadKeyboard",
+      "-setWebSearchKeyboard",
+      "-setEmailAddressKeyboard",
+      "-setURLKeyboard",
+      "-setTwitterKeyboard",
+      "-leftAlignText",
+      "-centerAlignText",
+      "-rightAlignText"
+    ]
+  },
+  {
+    "type": "timer",
+    "source": "https://docs.scriptable.app/timer/",
+    "members": [
+      "timeInterval",
+      "repeats",
+      "-new Timer",
+      "-schedule",
+      "-invalidate",
+      "+schedule"
+    ]
+  },
+  {
+    "type": "uitable",
+    "source": "https://docs.scriptable.app/uitable/",
+    "members": [
+      "showSeparators",
+      "-new UITable",
+      "-addRow",
+      "-removeRow",
+      "-removeAllRows",
+      "-reload",
+      "-present"
+    ]
+  },
+  {
+    "type": "uitablecell",
+    "source": "https://docs.scriptable.app/uitablecell/",
+    "members": [
+      "widthWeight",
+      "onTap",
+      "dismissOnTap",
+      "titleColor",
+      "subtitleColor",
+      "titleFont",
+      "subtitleFont",
+      "+text",
+      "+image",
+      "+imageAtURL",
+      "+button",
+      "-leftAligned",
+      "-centerAligned",
+      "-rightAligned"
+    ]
+  },
+  {
+    "type": "uitablerow",
+    "source": "https://docs.scriptable.app/uitablerow/",
+    "members": [
+      "cellSpacing",
+      "height",
+      "isHeader",
+      "dismissOnSelect",
+      "onSelect",
+      "backgroundColor",
+      "-new UITableRow",
+      "-addCell",
+      "-addText",
+      "-addImage",
+      "-addImageAtURL",
+      "-addButton"
+    ]
+  },
+  {
+    "type": "urlscheme",
+    "source": "https://docs.scriptable.app/urlscheme/",
+    "members": [
+      "+allParameters",
+      "+parameter",
+      "+forOpeningScript",
+      "+forOpeningScriptSettings",
+      "+forRunningScript"
+    ]
+  },
+  {
+    "type": "uuid",
+    "source": "https://docs.scriptable.app/uuid/",
+    "members": [
+      "+string"
+    ]
+  },
+  {
+    "type": "webview",
+    "source": "https://docs.scriptable.app/webview/",
+    "members": [
+      "shouldAllowRequest",
+      "-new WebView",
+      "+loadHTML",
+      "+loadFile",
+      "+loadURL",
+      "-loadURL",
+      "-loadRequest",
+      "-loadHTML",
+      "-loadFile",
+      "-evaluateJavaScript",
+      "-getHTML",
+      "-present",
+      "-waitForLoad"
+    ]
+  },
+  {
+    "type": "widgetdate",
+    "source": "https://docs.scriptable.app/widgetdate/",
+    "members": [
+      "date",
+      "textColor",
+      "font",
+      "textOpacity",
+      "lineLimit",
+      "minimumScaleFactor",
+      "shadowColor",
+      "shadowRadius",
+      "shadowOffset",
+      "url",
+      "-leftAlignText",
+      "-centerAlignText",
+      "-rightAlignText",
+      "-applyTimeStyle",
+      "-applyDateStyle",
+      "-applyRelativeStyle",
+      "-applyOffsetStyle",
+      "-applyTimerStyle"
+    ]
+  },
+  {
+    "type": "widgetimage",
+    "source": "https://docs.scriptable.app/widgetimage/",
+    "members": [
+      "image",
+      "resizable",
+      "imageSize",
+      "imageOpacity",
+      "cornerRadius",
+      "borderWidth",
+      "borderColor",
+      "containerRelativeShape",
+      "tintColor",
+      "url",
+      "-leftAlignImage",
+      "-centerAlignImage",
+      "-rightAlignImage",
+      "-applyFittingContentMode",
+      "-applyFillingContentMode"
+    ]
+  },
+  {
+    "type": "widgetspacer",
+    "source": "https://docs.scriptable.app/widgetspacer/",
+    "members": [
+      "length"
+    ]
+  },
+  {
+    "type": "widgetstack",
+    "source": "https://docs.scriptable.app/widgetstack/",
+    "members": [
+      "backgroundColor",
+      "backgroundImage",
+      "backgroundGradient",
+      "spacing",
+      "size",
+      "cornerRadius",
+      "borderWidth",
+      "borderColor",
+      "url",
+      "-addText",
+      "-addDate",
+      "-addImage",
+      "-addSpacer",
+      "-addStack",
+      "-setPadding",
+      "-useDefaultPadding",
+      "-topAlignContent",
+      "-centerAlignContent",
+      "-bottomAlignContent",
+      "-layoutHorizontally",
+      "-layoutVertically"
+    ]
+  },
+  {
+    "type": "widgettext",
+    "source": "https://docs.scriptable.app/widgettext/",
+    "members": [
+      "text",
+      "textColor",
+      "font",
+      "textOpacity",
+      "lineLimit",
+      "minimumScaleFactor",
+      "shadowColor",
+      "shadowRadius",
+      "shadowOffset",
+      "url",
+      "-leftAlignText",
+      "-centerAlignText",
+      "-rightAlignText"
+    ]
+  },
+  {
+    "type": "xmlparser",
+    "source": "https://docs.scriptable.app/xmlparser/",
+    "members": [
+      "didStartDocument",
+      "didEndDocument",
+      "didStartElement",
+      "didEndElement",
+      "foundCharacters",
+      "parseErrorOccurred",
+      "string",
+      "-new XMLParser",
+      "-parse"
+    ]
+  }
+]
